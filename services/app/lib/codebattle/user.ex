@@ -5,13 +5,16 @@ defmodule Codebattle.User do
   use Ecto.Schema
   import Ecto.Changeset
 
-  @derive {Poison.Encoder, only: [:id, :name, :rating, :guest, :github_id]}
+  @derive {Poison.Encoder, only: [:id, :name, :rating, :guest, :github_id, :lang, :editor_mode, :editor_theme]}
 
   schema "users" do
     field(:name, :string)
     field(:email, :string)
     field(:github_id, :integer)
     field(:rating, :integer)
+    field(:lang, :string)
+    field(:editor_mode, :string)
+    field(:editor_theme, :string)
     field(:guest, :boolean, virtual: true, default: false)
     field(:bot, :boolean, virtual: true, default: false)
 
@@ -26,7 +29,7 @@ defmodule Codebattle.User do
   """
   def changeset(struct, params \\ %{}) do
     struct
-    |> cast(params, [:name, :email, :github_id, :rating])
+    |> cast(params, [:name, :email, :github_id, :rating, :lang, :editor_mode, :editor_theme])
     |> validate_required([:name, :email, :github_id])
   end
 end
