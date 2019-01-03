@@ -19,7 +19,6 @@ const DEV_ENTRIES = [
 const APP_ENTRIES = ['./assets/js/app.js', './assets/css/app.scss'];
 
 const commonPlugins = [
-  new ExtractTextPlugin('css/app.css'),
   new CopyWebpackPlugin([
     { from: 'assets/static' },
   ]),

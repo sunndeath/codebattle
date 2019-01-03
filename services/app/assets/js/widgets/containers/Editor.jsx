@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import MonacoEditor from 'react-monaco-editor';
 
@@ -10,7 +10,21 @@ const selectionBlockStyle = {
   bottom: 0,
 };
 
-class Editor extends PureComponent {
+class Editor extends Component {
+  componentDidUpdate() {
+    if (this.editor && this.props.current) {
+      this.editor.focus();
+    }
+  }
+
+  editorDidMount = (editor) => {
+    this.editor = editor;
+    this.editor.focus();
+    // this.editor.getModel().updateOptions({ tabSize: this.tabSize });
+
+    window.addEventListener('resize', this.handleResize);
+  }
+
   static propTypes = {
     value: PropTypes.string,
     name: PropTypes.string.isRequired,
@@ -63,6 +77,7 @@ class Editor extends PureComponent {
           theme="vs-dark"
           options={options}
           language={console.log(mappedSyntax) || mappedSyntax}
+          editorDidMount={this.editorDidMount}
           value={value}
           onChange={onChange}
         />
