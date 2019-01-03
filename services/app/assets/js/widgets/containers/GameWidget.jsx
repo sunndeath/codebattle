@@ -60,7 +60,7 @@ class GameWidget extends Component {
       syntax: editorState.currentLangSlug || 'javascript',
       value: editorState.text,
       name: 'left-editor',
-      editorHeight: `${leftEditorHeight}px`,
+      editorHeight: leftEditorHeight,
     };
   }
 
@@ -75,7 +75,7 @@ class GameWidget extends Component {
       syntax: editorState.currentLangSlug || 'javascript',
       value: editorState.text,
       name: 'right-editor',
-      editorHeight: `${rightEditorHeight}px`,
+      editorHeight: rightEditorHeight,
     };
   }
 

@@ -1,7 +1,9 @@
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const path = require('path');
 const webpack = require('webpack');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const MonacoWebpackPlugin = require('monaco-editor-webpack-plugin');
 // const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 const env = process.env.NODE_ENV || 'dev';
@@ -30,6 +32,18 @@ const commonPlugins = [
     'window.jQuery': 'jquery',
     Tether: 'tether',
     Popper: ['popper.js', 'default'],
+  }),
+
+  new MonacoWebpackPlugin({
+    languages: ['javascript', 'php',
+      'ruby', 'python', 'elixir',
+      'haskell', 'clojure', 'perl',
+    ],
+  }),
+
+  new MiniCssExtractPlugin({
+    filename: '[name].css',
+    // chunkFilename: '[id].chunk.css',
   }),
 ];
 
@@ -66,10 +80,20 @@ module.exports = {
       },
       {
         test: /\.scss$/,
-        use: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
-          use: ['css-loader', 'postcss-loader', 'sass-loader'],
-        }),
+        use: [
+          MiniCssExtractPlugin.loader,
+          'css-loader',
+          'postcss-loader',
+          'sass-loader',
+        ],
+      },
+      {
+        test: /\.css/,
+        use: [
+          MiniCssExtractPlugin.loader,
+          'css-loader',
+          'postcss-loader',
+        ],
       },
       {
         test: /\.(eot|svg|ttf|woff|woff2)$/,

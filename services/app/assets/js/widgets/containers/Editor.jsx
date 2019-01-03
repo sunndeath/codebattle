@@ -1,19 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import AceEditor from 'react-ace';
-import 'brace';
-import 'brace/mode/javascript';
-import 'brace/mode/ruby';
-import 'brace/mode/elixir';
-import 'brace/mode/php';
-import 'brace/mode/haskell';
-import 'brace/mode/clojure';
-import 'brace/mode/perl';
-import 'brace/mode/python';
-import 'brace/theme/solarized_dark';
-import 'brace/ext/language_tools';
-import 'brace/keybinding/emacs';
-import 'brace/keybinding/vim';
+import MonacoEditor from 'react-monaco-editor';
 
 const selectionBlockStyle = {
   position: 'absolute',
@@ -58,28 +45,27 @@ class Editor extends PureComponent {
     // FIXME: move here and apply mapping object
     const mappedSyntax = syntax === 'js' ? 'javascript' : syntax;
 
+    const options = {
+      fontSize: 16,
+      scrollBeyondLastLine: false,
+      selectOnLineNumbers: true,
+      // automaticLayout: true,
+      minimap: {
+        enabled: true,
+      },
+    };
+
     return (
       <div className="my-2" style={{ position: 'relative' }}>
-        <AceEditor
-          mode={mappedSyntax}
-          theme="solarized_dark"
-          onChange={onChange}
-          name={name}
-          value={value}
-          readOnly={!editable}
-          wrapLines
-          editorProps={{ $blockScrolling: true }}
-          width="auto"
+
+        <MonacoEditor
           height={editorHeight}
-          fontSize={16}
-          showPrintMargin={false}
-          keyboardHandler={keyboardHandler}
-          setOptions={{ tabSize: 2 }}
+          theme="vs-dark"
+          options={options}
+          language={console.log(mappedSyntax) || mappedSyntax}
+          value={value}
+          onChange={onChange}
         />
-        {
-        allowCopy ? null : (
-          <div style={selectionBlockStyle} />
-        )}
       </div>
     );
   }
