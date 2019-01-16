@@ -7,7 +7,7 @@ defmodule Codebattle.Bot.Playbook do
 
   schema "bot_playbooks" do
     field(:data, :map)
-    field(:user_id, :integer)
+    field(:player_id, :integer)
     field(:game_id, :integer)
     field(:task_id, :integer)
     # TODO: add to lang_id instead slug
@@ -19,8 +19,8 @@ defmodule Codebattle.Bot.Playbook do
   @doc false
   def changeset(%Playbook{} = playbook, attrs) do
     playbook
-    |> cast(attrs, [:data, :user_id, :game_id, :task_id, :lang])
-    |> validate_required([:data, :user_id, :game_id, :task_id, :lang])
+    |> cast(attrs, [:data, :player_id, :game_id, :task_id, :lang])
+    |> validate_required([:data, :player_id, :game_id, :task_id, :lang])
   end
 
   def random(task_id) do

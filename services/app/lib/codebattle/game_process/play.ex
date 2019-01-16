@@ -103,8 +103,11 @@ defmodule Codebattle.GameProcess.Play do
             level: level
           })
 
+
         ActiveGames.create_game(user, fsm)
         GlobalSupervisor.start_game(game.id, fsm)
+
+        RecorderServer.add_player(game.id, player.id)
 
         Task.async(fn -> CodebattleWeb.Endpoint.broadcast("lobby", "game:new", %{game: fsm}) end)
 
@@ -131,6 +134,8 @@ defmodule Codebattle.GameProcess.Play do
       game
       |> Game.changeset(%{state: "playing", task_id: task.id})
       |> Repo.update!()
+
+      RecorderServer.add_player(game.id, user.id)
 
       case Server.call_transition(id, :join, %{
              player: Player.from_user(user),
