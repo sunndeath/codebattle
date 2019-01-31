@@ -48,7 +48,8 @@
     "redux": "^4.0.1",
     "redux-actions": "^2.6.4",
     "redux-persist": "^5.10.0",
-    "redux-thunk": "^2.2.0"
+    "redux-thunk": "^2.2.0",
+    "typed.js": "^2.0.10"
   },
   "devDependencies": {
     "@babel/cli": "^7.1.0",
