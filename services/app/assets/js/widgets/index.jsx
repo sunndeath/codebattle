@@ -7,3 +7,4 @@ export const renderGameWidget = domElement => render(<Game />, domElement);
 export const renderLobby = domElement => render(<Lobby />, domElement);
 export const renderHeatmapWidget = domElement => render(<Heatmap />, domElement);
 export const renderUsersRating = domElement => render(<UsersRating />, domElement);
+export const renderTournament = domElement => render(<Tournament />, domElement);

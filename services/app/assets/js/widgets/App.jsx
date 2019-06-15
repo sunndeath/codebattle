@@ -51,3 +51,11 @@ export const UsersRating = () => (
     </PersistGate>
   </Provider>
 );
+
+export const Tournament = () => (
+  <Provider store={store}>
+    <PersistGate loading={null} persistor={persistor}>
+      <ASDF />
+    </PersistGate>
+  </Provider>
+);

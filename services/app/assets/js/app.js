@@ -22,13 +22,14 @@ import 'bootstrap';
 // paths "./socket" or full ones "web/static/js/socket".
 
 import {
-  renderGameWidget, renderLobby, renderHeatmapWidget, renderUsersRating,
+  renderGameWidget, renderLobby, renderHeatmapWidget, renderUsersRating, renderTournament
 } from './widgets';
 
 const gameWidgetRoot = document.getElementById('game-widget-root');
 const heatmapRoot = document.getElementById('heatmap-root');
 const gameListRoot = document.getElementById('game-list');
 const ratingList = document.getElementById('rating-list');
+const tournament = document.getElementById('tournament-widget-root');
 
 if (gameWidgetRoot) {
   renderGameWidget(gameWidgetRoot);
@@ -44,4 +45,8 @@ if (gameListRoot) {
 
 if (ratingList) {
   renderUsersRating(ratingList);
+}
+
+if (tournament) {
+  renderTournament(tournament);
 }
